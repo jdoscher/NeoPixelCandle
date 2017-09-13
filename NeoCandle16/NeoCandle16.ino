@@ -5,7 +5,7 @@
 // Updated by Jay Doscher, May 2017
 
 #include <Adafruit_NeoPixel.h>
-#define PIN 1
+#define PIN 5
 
 // color variables: mix RGB (0-255) for desired yellow
 int redPx = 255;
@@ -29,7 +29,7 @@ int flutDelay;
 int flutLow;
 
 // Change "12" below to pixel count
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(24, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(12, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   flickerDepth = (burnDepth + flutterDepth) / 2.4;
@@ -81,19 +81,6 @@ void fire(int grnLow) {
     strip.setPixelColor(9, redPx-180, darkGrn, 0);
     strip.setPixelColor(10, redPx-120, grnPx-50, bluePx-5);
     strip.setPixelColor(11, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(12, redPx-180, darkGrn, 0);
-    strip.setPixelColor(13, redPx-180, darkGrn, 0);
-    strip.setPixelColor(14, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(15, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(16, redPx, grnPx, bluePx);
-    strip.setPixelColor(17, redPx, grnPx, bluePx);
-    strip.setPixelColor(18, redPx, halfGrn, bluePx);
-    strip.setPixelColor(19, redPx, grnHigh, bluePx);
-    // 8-11 here are for the pixels 9-12. Add more lines for more pixels
-    strip.setPixelColor(20, redPx-180, darkGrn, 0);
-    strip.setPixelColor(21, redPx-180, darkGrn, 0);
-    strip.setPixelColor(22, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(23, redPx-60, grnPx-35, bluePx-2);
     strip.show();
     delay(fDelay);
   }  
@@ -114,19 +101,6 @@ void fire(int grnLow) {
     strip.setPixelColor(9, redPx-180, darkGrn, 0);
     strip.setPixelColor(10, redPx-120, grnPx-50, bluePx-5);
     strip.setPixelColor(11, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(12, redPx-180, darkGrn, 0);
-    strip.setPixelColor(13, redPx-180, darkGrn, 0);
-    strip.setPixelColor(14, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(15, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(16, redPx, grnPx, bluePx);
-    strip.setPixelColor(17, redPx, grnPx, bluePx);
-    strip.setPixelColor(18, redPx, halfGrn, bluePx);
-    strip.setPixelColor(19, redPx, grnHigh, bluePx);
-    // 8-11 here are for the pixels 9-12. Add more lines for more pixels
-    strip.setPixelColor(20, redPx-180, darkGrn, 0);
-    strip.setPixelColor(21, redPx-180, darkGrn, 0);
-    strip.setPixelColor(22, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(23, redPx-60, grnPx-35, bluePx-2);
     strip.show();
     delay(fDelay);
   }
@@ -149,26 +123,13 @@ void on(int f) {
     strip.setPixelColor(9, redPx-180, grnPx-70, 0);
     strip.setPixelColor(10, redPx-120, grnPx-50, bluePx-5);
     strip.setPixelColor(11, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(12, redPx-180, grnPx-70, 0);
-    strip.setPixelColor(13, redPx-180, grnPx-70, 0);
-    strip.setPixelColor(14, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(15, redPx-60, grnPx-35, bluePx-2);
-    strip.setPixelColor(16, redPx, grnPx, bluePx);
-    strip.setPixelColor(17, redPx, grnPx, bluePx);
-    strip.setPixelColor(18, redPx, grnPx, bluePx);
-    strip.setPixelColor(19, redPx, grnHigh, bluePx);
-    // 8-11 here are for the pixels 9-12. Add more lines for more pixels
-    strip.setPixelColor(20, redPx-180, grnPx-70, 0);
-    strip.setPixelColor(21, redPx-180, grnPx-70, 0);
-    strip.setPixelColor(22, redPx-120, grnPx-50, bluePx-5);
-    strip.setPixelColor(23, redPx-60, grnPx-35, bluePx-2);
   strip.show();
   delay(fRep);
 }
 
 void burn(int f) {
   // Change the 12 below to your total pixel count
-  fRep = f * 24;
+  fRep = f * 12;
   fDelay = burnDelay;
   for (int var = 0; var < fRep; var++) {
     fire(burnLow);
@@ -177,7 +138,7 @@ void burn(int f) {
 
 void flicker(int f) {
   // Change the 12 below to your total pixel count
-  fRep = f * 24;
+  fRep = f * 12;
   fDelay = burnDelay;
   fire(burnLow);
   fDelay = flickDelay;
@@ -191,8 +152,8 @@ void flicker(int f) {
 }
 
 void flutter(int f) {
-  // Change the 12 below to your total pixel count
-  fRep = f * 24;  
+  // Change the 16 below to your total pixel count
+  fRep = f * 12;  
   fDelay = burnDelay;
   fire(burnLow);
   fDelay = flickDelay;

@@ -1,11 +1,22 @@
-// candle for Adafruit NeoPixel
-// 12 pixel version
+// Candle for Adafruit NeoPixel
+// 8 pixel version
 // by Tim Bartlett, December 2013
 // Original here: https://github.com/timpear/NeoCandle
 // Updated by Jay Doscher, May 2017
+// Updated here:
+// 
+// Uses the following gear:
+// Adafruit Trinket 5v -----------------> http://amzn.to/2h33jFe
+// Adafruit Neopixel Strip (8 LEDs) ----> http://amzn.to/2h33ikE
+
+// Mystery AVR code! Spooky!
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
 
 #include <Adafruit_NeoPixel.h>
 #define PIN 1
+#define PIXEL_COUNT 8
 
 // color variables: mix RGB (0-255) for desired yellow
 int redPx = 255;
@@ -28,10 +39,14 @@ int flickLow;
 int flutDelay;
 int flutLow;
 
-// Change "12" below to pixel count
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(24, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXEL_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
+  // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
+  #if defined (__AVR_ATtiny85__)
+    if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+  #endif
+  // End of trinket special code
   flickerDepth = (burnDepth + flutterDepth) / 2.4;
   burnLow = grnHigh - burnDepth;
   burnDelay = (cycleTime / 2) / burnDepth;
